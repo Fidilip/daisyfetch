@@ -1,0 +1,14 @@
+
+
+<h2> Add new web </h2>
+<form name="frm" data-ng-submit="btnAdd()">
+	
+	<div data-ng-include="'templates/form.partial.html'">
+	</div>
+	
+	<input type="submit" data-ng-disabled="frm.valid() && frm.dirty()" class="btn btn-success">
+	
+	<a href="#/">
+		<button type="button" class="btn btn-danger">Cancel</button>
+	</a>
+</form>

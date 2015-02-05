@@ -1,0 +1,27 @@
+body {
+	padding-top: 90px;
+}
+
+nav li, nav a, nav span {
+	line-height: 44px !important;
+	vertical-align: middle;
+}
+
+nav img {
+	width: 200px;
+}
+
+footer {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+footer div.col-lg-12 {
+	border-top: 1px solid gray;
+	padding-top: 5px;
+}
+
+img.screen {
+	padding: 7px;
+	border: 1px dashed rgb(213, 210, 210);
+}

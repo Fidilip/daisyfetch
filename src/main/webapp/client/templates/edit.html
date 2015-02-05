@@ -1,0 +1,16 @@
+
+
+<h2> Editing '{{partial.item.name}}' </h2>
+
+<form name="frm" data-ng-submit="btnEdit()">
+	
+	<div data-ng-include="'templates/form.partial.html'">
+	</div>
+	
+	<input type="submit" value="Save" data-ng-disabled="$frm.valid() && $frm.dirty()" class="btn btn-primary">
+	
+	<a href="#/">
+		<button type="button" class="btn btn-danger">Cancel</button>
+	</a>
+
+</form>

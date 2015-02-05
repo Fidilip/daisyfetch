@@ -1,0 +1,33 @@
+
+	
+	<a href="#/add">
+		<button type="button" class="btn btn-success">Add new</button>
+	</a>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>URL</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="web in webs">
+				<td>
+					<a href="/rest/fetch/{{userEmail}}/{{web.name}}">
+						{{web.name}}
+					</a>
+				</td>
+				<td>{{web.url}}</td>
+				<td>
+					<a href="#/edit/{{web.name}}">
+						<button type="button" class="btn btn-primary">Edit</button>
+					</a>
+					
+					<button data-ng-click="btnRemove(web)" 
+							class="btn btn-danger">Remove</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>

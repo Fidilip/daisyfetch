@@ -1,0 +1,21 @@
+.ng-enter {
+	transition: 0.5s;
+	opacity: 0;
+}
+
+.ng-enter-active {
+	opacity: 1;
+}
+
+.ng-leave {
+	transition: 0.5s;
+	opacity: 1;
+}
+
+.ng-leave-active {
+	opacity: 0;
+}
+
+input.ng-invalid.ng-dirty {
+	border-color: red;
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="main">
+  <head>
+    <title>Daisyfetch</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap-css/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	
+	<div class="col-md-12">
+		<nav class="navbar navbar-default" data-ng-controller="identityController">
+			<p class="navbar-text">Logged in using {{type}}</p>
+			<p class="navbar-text">Email: {{email}}</p>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="/auth?logout">Logout</a>
+				</li>
+			</ul>
+		</nav>
+		
+		<hr>
+	  	<div data-ng-view=""></div>
+  	</div>
+
+  	<!-- Libs -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    
+    <!-- App -->
+    <script src="module.js"></script>
+  </body>
+</html>

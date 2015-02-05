@@ -1,0 +1,80 @@
+<!-- =============================================================================== -->
+<div class="form-group">
+	<label for="name">Name</label> <input data-ng-model="partial.item.name"
+		type="text" class="form-control" id="name" name="name"
+		pattern="[a-z0-9\-]{3,}">
+</div>
+
+<div class="form-group">
+	<label for="url">URL</label> <input data-ng-model="partial.item.url"
+		data-ng-blur="urlChange()" type="url" class="form-control" id="url" required>
+	<br><span>{{partial.item.urlStatus}}</span>
+</div>
+
+<!-- =============================================================================== -->
+<fieldset>
+	<legend>
+		<label for="snippetsEnabled">Snippets</label> 
+		<input type="checkbox" data-ng-model="partial.item.snippetsEnabled" id="snippetsEnabled">
+	</legend>	
+	
+	<div class="form-group" data-ng-show="partial.item.snippetsEnabled">
+		<div class="row" data-ng-repeat="snippet in partial.item.snippets">
+			<div class="form-group col-md-2">
+				<label for="snippetName{{$index}}">Name</label> 
+				<input data-ng-model="partial.item.snippets[$index].name"
+					type="text" class="form-control" id="snippetName{{$index}}">
+			</div>
+			
+			<div class="form-group col-md-8">
+				<label for="snippetSelector{{$index}}">Selector (<a target="_blank" href="http://jsoup.org/cookbook/extracting-data/selector-syntax">list of selectors</a>)</label> 
+				<input data-ng-model="partial.item.snippets[$index].selector"
+					type="text" class="form-control" id="snippetSelector{{$index}}">
+			</div>
+			
+			<div class="form-group col-md-2">
+				<button type="button" 
+						data-ng-click="partial.removeSnippet($index)"
+						class="btn btn-danger">
+						Remove
+				</button>
+			</div>
+		</div>
+		<button type="button" data-ng-click="partial.addSnippet()" class="btn btn-success">Add snippet</button>
+	</div>
+</fieldset>
+<!-- =============================================================================== -->
+
+<fieldset>
+	<legend>
+		<label for="cache">Caching</label> 
+		<input type="checkbox" data-ng-model="partial.item.cache" id="cache">
+	</legend>
+	
+	<div class="form-group" data-ng-show="partial.item.cache">
+		<div class="form-group">
+			Cache lease time <input type="number" data-ng-model="partial.item.cacheLeaseTime" /> minutes.
+		</div>
+	</div>
+</fieldset>
+<!-- =============================================================================== -->
+<fieldset>
+	<legend>
+		<label for="Reporting">Reporting</label> 
+		<input type="checkbox" data-ng-model="partial.item.reporting" id="Reporting">
+	</legend>
+	
+	<div class="form-group" data-ng-show="partial.item.reporting">
+		<div class="form-group">
+			<label for="reportUrl">Report url</label> 
+			<input data-ng-model="partial.item.reportUrl"
+				type="url" class="form-control" id="reportUrl" name="reportUrl">
+		</div>
+	
+		<div class="form-group">
+			Check every <select data-ng-model="partial.item.reportInterval"
+							   	data-ng-options="n for n in [12,24,48,72]"></select> hours.
+		</div>
+	</div>
+</fieldset>
+<!-- =============================================================================== -->

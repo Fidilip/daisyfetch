@@ -1,0 +1,12 @@
+#ignore configuration files
+*.cli
+
+#ignore build
+target
+
+#ignore metafiles
+.attach*
+.classpath
+.project
+.tern-project
+.settings
