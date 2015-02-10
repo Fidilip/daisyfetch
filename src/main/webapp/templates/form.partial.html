@@ -2,7 +2,7 @@
 <div class="form-group">
 	<label for="name">Name</label> <input data-ng-model="partial.item.name"
 		type="text" class="form-control" id="name" name="name"
-		pattern="[a-z0-9\-]{3,}">
+		pattern="[a-zA-Z0-9\-]{3,}">
 </div>
 
 <div class="form-group">
@@ -23,7 +23,7 @@
 			<div class="form-group col-md-2">
 				<label for="snippetName{{$index}}">Name</label> 
 				<input data-ng-model="partial.item.snippets[$index].name"
-					type="text" class="form-control" id="snippetName{{$index}}">
+					type="text" class="form-control" id="snippetName{{$index}}" pattern="[a-zA-Z]{3,}">
 			</div>
 			
 			<div class="form-group col-md-8">

@@ -8,9 +8,13 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>angularjs client</web-resource-name>
-			<url-pattern>/client/*</url-pattern>
-			<url-pattern>/client/index.html</url-pattern>
+			<url-pattern>/client.html</url-pattern>
 		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>rest</web-resource-name>
+			<url-pattern>/rest/web</url-pattern>
+		</web-resource-collection>
+		
 		<auth-constraint>
 			<role-name>user</role-name>
 		</auth-constraint>

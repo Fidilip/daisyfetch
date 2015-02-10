@@ -3,8 +3,8 @@
  */
 
 var main =  angular.module("main", ['ngRoute']);
-var HOME = "http://daisyfetch-fsivak.rhcloud.com";
-var WS_FORM_SOCKET = "ws://http://daisyfetch-fsivak.rhcloud.com/formSocket";
+var HOME = ".";
+var WS_FORM_SOCKET = "ws://daisyfetch-fsivak.rhcloud.com/formSocket";
 
 main.config(["$routeProvider", function($routeProvider) {
 	$routeProvider.when("/",  {
@@ -41,6 +41,7 @@ main.factory("WebService", ["$http", function($http) {
 		return $http.post(HOME + "/rest/web", item);
 	}
 	
+	// TODO: change query param to path param
 	service.remove = function(item) {
 		return $http.delete(HOME + "/rest/web?uuid="+item.name);
 	}
