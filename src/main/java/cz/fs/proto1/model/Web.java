@@ -37,6 +37,10 @@ public class Web implements Serializable {
 	// -------------------------------
 	@JsonIgnore
 	private String cachedValue = null;
+	
+	@JsonIgnore
+	private String cachedJson = null;
+	
 	protected long lastCacheTime = 0L;
 
 	protected long lastReported = 0L;
@@ -160,6 +164,9 @@ public class Web implements Serializable {
 	}
 
 	// Do not send this to client!
+	/** 
+	 * The underscore is there for not sending it to client, this is just temporary bugfix
+	 * */
 	@JsonIgnore
 	public String _getCachedValue() {
 		return cachedValue;
@@ -170,6 +177,14 @@ public class Web implements Serializable {
 		this.cachedValue = cachedValue;
 	}
 	
+	public String _getCachedJson() {
+		return cachedJson;
+	}
+
+	public void _setCachedJson(String cachedJson) {
+		this.cachedJson = cachedJson;
+	}
+
 	@JsonProperty
 	public long getLastReported() {
 		return lastReported;

@@ -55,7 +55,7 @@ public class FetchRest {
 	
 	protected Response fetchContent(Web web) throws IOException {
 		if(web.getSnippetsEnabled()) {
-			String json = fetchService.getSnippets(web);
+			String json = fetchService.fetchSnippets(web);
 			ResponseBuilder rb = Response.ok(json, MediaType.APPLICATION_JSON);
 			addHeaders(web, rb);
 			return rb.build();

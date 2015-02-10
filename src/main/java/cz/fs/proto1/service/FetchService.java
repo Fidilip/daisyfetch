@@ -1,21 +1,15 @@
 package cz.fs.proto1.service;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import cz.fs.proto1.model.Snippet;
 import cz.fs.proto1.model.Web;
 
 @ApplicationScoped
@@ -24,7 +18,8 @@ public class FetchService {
 	@Inject
 	protected WebManager webManager;
 	
-	protected ObjectMapper mapper = new ObjectMapper();
+	@Inject
+	protected JsoupConverterService jsoupConverter;
 	
 	public String fetch(Web web) throws IOException {
 		return getContent(web);
@@ -49,8 +44,9 @@ public class FetchService {
 	}
 	
 	protected String fetchContent(Web web) throws IOException {
-		// TODO: use JAX-RS client instead!!
-		return Jsoup.connect(web.getUrl()).get().html();
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(web.getUrl());
+		return target.request().get(String.class);
 	}
 	
 	protected boolean isCacheValid(Web web) {
@@ -61,26 +57,20 @@ public class FetchService {
 		return web.cacheExpirationTime();
 	}
 
-	// TODO: cache json to avoid parsing
-	public String getSnippets(Web web) throws IOException {
-		Document doc = Jsoup.parse(getContent(web));
-	
-		Map<String, Object> map = new HashMap<>();
-		for(Snippet snippet : web.getSnippets()) {
-			Elements els = doc.select(snippet.getSelector());
-			
-			if(els.size() > 1) {
-				List<String> list = new LinkedList<>();
-				for(Element el : els) {
-					list.add(el.html());
-				}
-				map.put(snippet.getName(), list);
+	public String fetchSnippets(Web web) throws IOException {
+		// is caching enabled
+		if(web.getCache()) {
+			if(isCacheValid(web)) {
+				return web._getCachedJson();
 			}else {
-				map.put(snippet.getName(), els.html());
+				String content = jsoupConverter.htmlToJson(getContent(web), web.getSnippets());
+				web._setCachedJson(content);
+				webManager.update(web);
+				return content;
 			}
+		}else {
+			return fetchContent(web); 
 		}
-		
-		return mapper.writeValueAsString(map);
 	}
 	
 }
