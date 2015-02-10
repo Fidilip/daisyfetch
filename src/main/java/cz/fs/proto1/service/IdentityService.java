@@ -17,11 +17,12 @@ import java.io.Serializable;
 public class IdentityService implements Serializable {
 
 	private static final long serialVersionUID = -8055760348195273572L;
-
+	protected static final String PRINCIPAL = "PRINCIPAL";
+	
 	/** Obtains principal from session and returns it */
 	@Produces @PicketLinkPrincipal
 	public Principal producePrincipal(@Context HttpServletRequest req) {
-		Principal p = (Principal) req.getSession().getAttribute("PRINCIPAL");
+		Principal p = (Principal) req.getSession().getAttribute(PRINCIPAL);
 		
 		// getName should always return email
 		if(p instanceof FacebookPrincipal) {
@@ -30,6 +31,10 @@ public class IdentityService implements Serializable {
 			return fbPrinc;
 		}
 		return p;
+	}
+	
+	public void setPrincipal(HttpServletRequest req, Principal p) {
+		req.getSession().setAttribute(PRINCIPAL, p);
 	}
 	
 }
